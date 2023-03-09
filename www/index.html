@@ -1,0 +1,41 @@
+<html>
+
+<head></head>
+
+<body>
+    <div id="signinDiv"></div>
+    <div>I AM INDEX</div>
+
+    <form id="verify_form">
+        <textarea id="jwt_token" name="jwt_token" rows="10" cols="50"></textarea>
+        <input type="submit">
+    </form>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="./index.js"></script>
+
+    <script>
+        window.creds = {
+            client_id: '308309471033-rtkhcbc6mpd9m49n221hmpve5vgrc80f.apps.googleusercontent.com'
+        }
+
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+        }
+
+        window.addEventListener("load", ()=>{
+            google.accounts.id.initialize({
+                client_id: '308309471033-rtkhcbc6mpd9m49n221hmpve5vgrc80f.apps.googleusercontent.com',
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "outline", size: "large" }  // customization attributes
+            );
+            // google.accounts.id.prompt(); // also display the One Tap dialog
+        });
+    </script>
+    <div id="buttonDiv"></div>
+</body>
+
+</html>
